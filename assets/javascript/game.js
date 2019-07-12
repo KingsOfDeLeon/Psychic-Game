@@ -25,18 +25,14 @@ $(document).ready(function () {
 
         //Win condition
         if (userPick === letterList[computerPick]) {
-            numWins++;
-            winstreak++;
-            justLost = false;
-            winText.text('Wins: ' + numWins);
-            
-            
+            winClear();
             //console.log('winstreak: ' + winstreak + '\n' + 'justLost: ' + justLost + '\n' + 'numWins' + numWins);
+
             //winstreak handling
-            if (justLost === false && numWins > 1 && winstreak > 0) {
-                winStreakText.text("Wow you're on a " + winstreak + " winstreak!");
+            if (justLost === false && winstreak > 0) {
+                winStreakText.text("Wow you're on a " + (winstreak  + 1 ) + " winstreak!");
             }
-            computerPick = newLetter();
+            //computerPick = newLetter();
             //loss handling and resetting variables
         } else {
             numGuessesLeft--;
@@ -60,6 +56,19 @@ $(document).ready(function () {
         justLost = true;
         guessedText.text('Your Guesses so far: ');
         winStreakText.text(' ');
+        computerPick = newLetter();
+        return
+    }
+
+    function winClear() {
+        numWins++;
+        winstreak++;
+        numGuessesLeft = 9;
+        justLost = false;
+        guessedText.text('Your Guesses so far: ');
+        winStreakText.text(' ');
+        winText.text('Wins: ' + numWins);
+        guessesLeftText.text('Guesses Left: ' + numGuessesLeft);
         computerPick = newLetter();
         return
     }
